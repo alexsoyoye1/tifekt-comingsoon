@@ -1,42 +1,186 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
+/* --- CSS Variables and Global Styles --- */
+:root {
+  --glass: rgba(255, 255, 255, 0.05);
+  --border: rgba(255, 255, 255, 0.1);
+  --accent: #9333ea; /* A vibrant purple, equivalent to Tailwind's purple-500 */
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  background-color: #111827; /* A dark, modern background */
+  color: white;
+}
+
+/* --- Main Page Layout --- */
+.page {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+  align-items: center;
   padding: 2rem;
+  gap: 2rem;
+  box-sizing: border-box;
+}
+
+/* Responsive layout for smaller screens */
+@media (max-width: 900px) {
+  .page {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    min-height: auto;
+  }
+}
+
+/* --- Stage Section --- */
+.stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  height: 100%;
+  min-height: 600px;
+  overflow: hidden;
+}
+
+/* Spotlight effect and animation */
+.spotlight {
+  position: absolute;
+  inset: 0; /* Modern way to write top/right/bottom/left: 0 */
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.1),
+    transparent 40%
+  );
+  background-size: 300% 300%;
+  /* This animation replicates the GSAP timeline */
+  animation: moveSpotlight 12s ease-in-out infinite;
+}
+
+@keyframes moveSpotlight {
+  0% {
+    background-position: -20% 50%;
+  }
+  50% {
+    background-position: 120% 50%;
+  }
+  100% {
+    background-position: -20% 50%;
+  }
+}
+
+/* "COMING SOON" Heading */
+.stage h1 {
+  position: absolute;
+  top: 1.5rem; /* Replicates top-6 */
+  width: 100%;
+  text-align: center;
+  font-size: 2.25rem; /* Replicates text-4xl */
+  font-weight: 700; /* Replicates font-bold */
+}
+
+/* Stage Floor Gradient */
+/* NOTE: Add className="stage-floor" to this div in your JSX */
+.stage-floor {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4rem; /* Replicates h-16 */
+  background-image: linear-gradient(
+    to top,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+}
+
+/* Dancers */
+/* NOTE: Add className="dancer-container" to both Lottie divs in your JSX */
+.dancer-container {
+  position: absolute;
+
+  width: 100%; /* Replicates w-3/5 */
+  max-width: 60vw; /* Replicates max-w-sm */
+  /* Centers an absolutely positioned element */
+  left: 50%;
+  top: 15%;
+  transform: translateX(-50%);
+  /* Initial state for the fade effect */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1s ease-in-out, visibility 1s ease-in-out;
+}
+
+/* State toggled by JS to show the dancer */
+.dancer-container.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* --- Form Panel Section --- */
+.formPanel {
+  background-color: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 1rem; /* Replicates rounded-2xl */
+  padding: 2rem; /* Replicates p-8 */
+  backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.formPanel h2 {
+  font-size: 1.5rem; /* Replicates text-2xl */
+  font-weight: 600; /* Replicates font-semibold */
+  margin-bottom: 1.5rem; /* Replicates mb-6 */
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* Replicates space-y-4 on the form element */
+.formPanel form > * + * {
+  margin-top: 1rem;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Input Fields */
+.formPanel input {
+  width: 100%;
+  padding: 0.75rem; /* Replicates p-3 */
+  border-radius: 0.25rem; /* Replicates rounded */
+  background-color: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  font-size: 1rem;
+  box-sizing: border-box;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.formPanel input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
 }
 
-.card {
-  padding: 2em;
+.formPanel input:focus {
+  outline: none;
+  /* Replicates focus:ring-2 focus:ring-[var(--accent)] */
+  box-shadow: 0 0 0 2px var(--accent);
 }
 
-.read-the-docs {
-  color: #888;
+/* Submit Button */
+.formPanel button {
+  width: 100%;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem; /* Replicates py-3 */
+  background-color: var(--accent);
+  border-radius: 0.25rem; /* Replicates rounded */
+  font-weight: 700; /* Replicates font-bold */
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  /* Replicates Tailwind's default transition */
+  transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.formPanel button:hover {
+  background-color: #7e22ce; /* Replicates hover:bg-purple-600 */
 }
