@@ -7,7 +7,7 @@ export default defineConfig({
     port: 5173,
     proxy: {
       // Proxy API calls to the Express server in dev
-      "/api": "http://localhost:4000",
+      "/api": "https://tifekt.com/api",
     },
   },
 });
