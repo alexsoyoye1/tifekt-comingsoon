@@ -20,7 +20,7 @@ const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "changeme";
 
 // --- Middleware ---
 app.use(helmet());
-app.use(cors()); // in production: cors({ origin: "https://tifekt.com" })
+app.use(cors({ origin: "https://tifekt.com" }));
 app.use(express.json());
 app.use(morgan("dev"));
 
