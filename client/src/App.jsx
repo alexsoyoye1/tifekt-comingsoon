@@ -9,7 +9,7 @@ function App() {
   const dancerARef = useRef(null);
   const dancerBRef = useRef(null);
   const titleRef = useRef(null); // New ref for the title
-  const backend = import.meta.env.VITE_API || "http://localhost:4000";
+  const backend = import.meta.env.VITE_API || "https://tifekt.com";
 
   const [activeDancer, setActiveDancer] = useState(0);
   const DURATION_SHOW = 4000;

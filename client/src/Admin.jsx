@@ -8,7 +8,7 @@ export default function Admin() {
   const [contacts, setContacts] = useState([]);
   const [error, setError] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
-  const backend = import.meta.env.VITE_API || "http://localhost:4000";
+  const backend = import.meta.env.VITE_API || "https://tifekt.com";
 
   const fetchContacts = async () => {
     try {
