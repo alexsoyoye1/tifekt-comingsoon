@@ -25,12 +25,33 @@ body {
   box-sizing: border-box;
 }
 
-/* Responsive layout for smaller screens */
+/* --- Mobile layout: stack dancers above form --- */
 @media (max-width: 900px) {
   .page {
     grid-template-columns: 1fr;
-    grid-template-rows: auto auto;
+    grid-template-rows: auto auto; /* dancers first, then form */
     min-height: auto;
+  }
+
+  /* Make dancers relative so they flow above the form */
+  .stage {
+    position: relative; /* already relative */
+    min-height: 400px; /* reduce for mobile if needed */
+  }
+
+  .dancer-container {
+    position: relative; /* change from absolute to relative */
+    top: auto;
+    left: auto;
+    transform: none;
+    max-width: 100%;
+    margin: 0 auto 2rem auto; /* bottom spacing before form */
+    opacity: 1 !important; /* ensure visible */
+    visibility: visible !important;
+  }
+
+  .formPanel {
+    width: 100%;
   }
 }
 
